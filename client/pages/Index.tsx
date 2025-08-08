@@ -179,7 +179,8 @@ export default function Index() {
     { key: 'personal' as const, label: 'Personal Info', icon: User },
     { key: 'experience' as const, label: 'Experience', icon: Briefcase },
     { key: 'education' as const, label: 'Education', icon: GraduationCap },
-    { key: 'skills' as const, label: 'Skills', icon: Code }
+    { key: 'skills' as const, label: 'Skills', icon: Code },
+    { key: 'templates' as const, label: 'Templates', icon: Palette }
   ];
 
   return (
