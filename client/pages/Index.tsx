@@ -201,7 +201,7 @@ export default function Index() {
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 py-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-[calc(100vh-140px)]">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 h-[calc(100vh-140px)]">
           {/* Left Panel - Form */}
           <div className="space-y-6">
             <Card className="border-orange-200">
