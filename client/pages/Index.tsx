@@ -259,6 +259,56 @@ export default function Index() {
                     <h3 className="text-lg font-semibold text-gray-800 border-b border-orange-200 pb-2">
                       Personal Information
                     </h3>
+
+                    {/* Profile Picture Upload */}
+                    <div className="flex flex-col items-center space-y-4 p-4 bg-orange-50 rounded-lg border border-orange-200">
+                      <div className="relative">
+                        {resumeData.personalInfo.profilePicture ? (
+                          <img
+                            src={resumeData.personalInfo.profilePicture}
+                            alt="Profile"
+                            className="w-24 h-24 rounded-full object-cover border-4 border-white shadow-md"
+                          />
+                        ) : (
+                          <div className="w-24 h-24 rounded-full bg-gray-200 border-4 border-white shadow-md flex items-center justify-center">
+                            <User className="w-8 h-8 text-gray-400" />
+                          </div>
+                        )}
+                      </div>
+                      <div className="text-center">
+                        <Label htmlFor="profilePicture" className="text-sm font-medium text-gray-700 mb-2 block">
+                          Profile Picture
+                        </Label>
+                        <input
+                          id="profilePicture"
+                          type="file"
+                          accept="image/*"
+                          onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            if (file) {
+                              const reader = new FileReader();
+                              reader.onload = (event) => {
+                                updatePersonalInfo('profilePicture', event.target?.result as string);
+                              };
+                              reader.readAsDataURL(file);
+                            }
+                          }}
+                          className="block w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-orange-100 file:text-orange-700 hover:file:bg-orange-200 cursor-pointer"
+                        />
+                        {resumeData.personalInfo.profilePicture && (
+                          <Button
+                            type="button"
+                            variant="outline"
+                            size="sm"
+                            onClick={() => updatePersonalInfo('profilePicture', '')}
+                            className="mt-2 text-xs border-orange-300 text-orange-600 hover:bg-orange-50"
+                          >
+                            Remove Picture
+                          </Button>
+                        )}
+                      </div>
+                    </div>
+
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
                         <Label htmlFor="fullName">Full Name *</Label>
