@@ -161,6 +161,20 @@ export default function Index() {
     window.print();
   };
 
+  const updateTemplate = (templateId: string) => {
+    setResumeData(prev => ({
+      ...prev,
+      template: templateId
+    }));
+  };
+
+  const updateSectionOrder = (newSectionOrder: ResumeSection[]) => {
+    setResumeData(prev => ({
+      ...prev,
+      sectionOrder: newSectionOrder
+    }));
+  };
+
   const sectionButtons = [
     { key: 'personal' as const, label: 'Personal Info', icon: User },
     { key: 'experience' as const, label: 'Experience', icon: Briefcase },
