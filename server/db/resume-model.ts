@@ -8,7 +8,8 @@ const PersonalInfoSchema = new mongoose.Schema({
   location: { type: String },
   linkedin: { type: String },
   website: { type: String },
-  summary: { type: String }
+  summary: { type: String },
+  profilePicture: { type: String }
 });
 
 const ExperienceSchema = new mongoose.Schema({
