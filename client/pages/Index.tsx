@@ -569,7 +569,7 @@ export default function Index() {
           </div>
 
           {/* Right Panel - Live Preview */}
-          <div className="xl:sticky xl:top-6 xl:h-fit">
+          <div className={`xl:sticky xl:top-6 xl:h-fit ${mobileView === 'form' ? 'hidden xl:block' : 'block'}`}>
             <Card className="border-orange-200 shadow-lg">
               <CardHeader className="bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-t-lg">
                 <CardTitle className="flex items-center text-base md:text-lg">
