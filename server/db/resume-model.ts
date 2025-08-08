@@ -44,11 +44,24 @@ const SkillSchema = new mongoose.Schema({
   }
 });
 
+const SectionSchema = new mongoose.Schema({
+  id: { type: String, required: true },
+  type: {
+    type: String,
+    enum: ['personal', 'summary', 'experience', 'education', 'skills'],
+    required: true
+  },
+  title: { type: String, required: true },
+  visible: { type: Boolean, default: true }
+});
+
 const ResumeSchema = new mongoose.Schema({
   personalInfo: { type: PersonalInfoSchema, required: true },
   experience: { type: [ExperienceSchema], default: [] },
   education: { type: [EducationSchema], default: [] },
-  skills: { type: [SkillSchema], default: [] }
+  skills: { type: [SkillSchema], default: [] },
+  template: { type: String, default: 'classic' },
+  sectionOrder: { type: [SectionSchema], default: [] }
 }, {
   timestamps: true
 });
