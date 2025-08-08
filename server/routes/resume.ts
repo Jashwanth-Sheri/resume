@@ -1,6 +1,6 @@
 import { RequestHandler } from "express";
 import { ResumeBuilderResponse, ResumeData } from "@shared/resume-types";
-import { connectToDatabase } from "../db/connection";
+import { connectToDatabase, isUsingFallback, inMemoryResumes } from "../db/connection";
 import Resume from "../db/resume-model";
 
 // Save or update resume
