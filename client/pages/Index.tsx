@@ -634,6 +634,53 @@ export default function Index() {
                     )}
                   </div>
                 )}
+
+                {/* Templates Section */}
+                {activeSection === 'templates' && (
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold text-gray-800 border-b border-orange-200 pb-2">
+                      Choose Template
+                    </h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {RESUME_TEMPLATES.map((template) => (
+                        <Card
+                          key={template.id}
+                          className={`cursor-pointer transition-all duration-200 ${
+                            resumeData.template === template.id
+                              ? 'border-orange-500 bg-orange-50 shadow-md'
+                              : 'border-orange-200 hover:border-orange-300 hover:shadow-sm'
+                          }`}
+                          onClick={() => updateTemplate(template.id)}
+                        >
+                          <CardContent className="p-4">
+                            <div className="aspect-[3/4] bg-white rounded border mb-3 flex items-center justify-center">
+                              <Grid3x3 className="w-8 h-8 text-gray-400" />
+                            </div>
+                            <h4 className="font-semibold text-gray-900 mb-1">{template.name}</h4>
+                            <p className="text-sm text-gray-600">{template.description}</p>
+                            {resumeData.template === template.id && (
+                              <div className="mt-2 flex items-center text-orange-600 text-sm font-medium">
+                                <Eye className="w-4 h-4 mr-1" />
+                                Current Template
+                              </div>
+                            )}
+                          </CardContent>
+                        </Card>
+                      ))}
+                    </div>
+
+                    <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                      <h4 className="font-semibold text-blue-900 mb-2 flex items-center">
+                        <Grid3x3 className="w-4 h-4 mr-2" />
+                        Section Reordering
+                      </h4>
+                      <p className="text-sm text-blue-700">
+                        You can drag and drop sections in the live preview to reorder them.
+                        This allows you to customize the layout of your resume according to your preferences.
+                      </p>
+                    </div>
+                  </div>
+                )}
               </CardContent>
             </Card>
           </div>
