@@ -560,12 +560,12 @@ export default function Index() {
                   <div className="max-w-none text-sm leading-relaxed">
                     {/* Header */}
                     <div className="text-center mb-6 pb-4 border-b-2 border-orange-500">
-                      <h1 className="text-3xl font-bold text-gray-900 mb-2">
+                      <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
                         {resumeData.personalInfo.fullName || 'Your Name'}
                       </h1>
-                      <div className="flex flex-wrap justify-center items-center gap-4 text-gray-600">
+                      <div className="flex flex-wrap justify-center items-center gap-2 md:gap-4 text-sm md:text-base text-gray-600">
                         {resumeData.personalInfo.email && (
-                          <span>{resumeData.personalInfo.email}</span>
+                          <span className="break-all">{resumeData.personalInfo.email}</span>
                         )}
                         {resumeData.personalInfo.phone && (
                           <span>{resumeData.personalInfo.phone}</span>
@@ -575,12 +575,12 @@ export default function Index() {
                         )}
                       </div>
                       {(resumeData.personalInfo.linkedin || resumeData.personalInfo.website) && (
-                        <div className="flex flex-wrap justify-center items-center gap-4 mt-2 text-orange-600">
+                        <div className="flex flex-wrap justify-center items-center gap-2 md:gap-4 mt-2 text-sm md:text-base text-orange-600">
                           {resumeData.personalInfo.linkedin && (
-                            <span>{resumeData.personalInfo.linkedin}</span>
+                            <span className="break-all">{resumeData.personalInfo.linkedin}</span>
                           )}
                           {resumeData.personalInfo.website && (
-                            <span>{resumeData.personalInfo.website}</span>
+                            <span className="break-all">{resumeData.personalInfo.website}</span>
                           )}
                         </div>
                       )}
