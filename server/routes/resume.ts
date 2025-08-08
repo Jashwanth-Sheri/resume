@@ -78,24 +78,43 @@ export const saveResume: RequestHandler = async (req, res) => {
 export const getResume: RequestHandler = async (req, res) => {
   try {
     await connectToDatabase();
-    
+
     const { id } = req.params;
-    const resume = await Resume.findById(id);
-    
-    if (!resume) {
+
+    if (isUsingFallback()) {
+      const resume = inMemoryResumes.find(r => r._id === id);
+      if (!resume) {
+        const response: ResumeBuilderResponse = {
+          success: false,
+          message: 'Resume not found'
+        };
+        return res.status(404).json(response);
+      }
+
       const response: ResumeBuilderResponse = {
-        success: false,
-        message: 'Resume not found'
+        success: true,
+        data: resume
       };
-      return res.status(404).json(response);
+
+      res.json(response);
+    } else {
+      const resume = await Resume.findById(id);
+
+      if (!resume) {
+        const response: ResumeBuilderResponse = {
+          success: false,
+          message: 'Resume not found'
+        };
+        return res.status(404).json(response);
+      }
+
+      const response: ResumeBuilderResponse = {
+        success: true,
+        data: resume.toObject()
+      };
+
+      res.json(response);
     }
-
-    const response: ResumeBuilderResponse = {
-      success: true,
-      data: resume.toObject()
-    };
-
-    res.json(response);
   } catch (error) {
     console.error('Error fetching resume:', error);
     const response: ResumeBuilderResponse = {
@@ -110,17 +129,35 @@ export const getResume: RequestHandler = async (req, res) => {
 export const getAllResumes: RequestHandler = async (req, res) => {
   try {
     await connectToDatabase();
-    
-    const resumes = await Resume.find()
-      .sort({ updatedAt: -1 })
-      .select('personalInfo.fullName personalInfo.email createdAt updatedAt');
 
-    const response: ResumeBuilderResponse = {
-      success: true,
-      data: resumes as any
-    };
+    if (isUsingFallback()) {
+      const resumes = inMemoryResumes
+        .sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime())
+        .map(r => ({
+          _id: r._id,
+          personalInfo: { fullName: r.personalInfo.fullName, email: r.personalInfo.email },
+          createdAt: r.createdAt,
+          updatedAt: r.updatedAt
+        }));
 
-    res.json(response);
+      const response: ResumeBuilderResponse = {
+        success: true,
+        data: resumes as any
+      };
+
+      res.json(response);
+    } else {
+      const resumes = await Resume.find()
+        .sort({ updatedAt: -1 })
+        .select('personalInfo.fullName personalInfo.email createdAt updatedAt');
+
+      const response: ResumeBuilderResponse = {
+        success: true,
+        data: resumes as any
+      };
+
+      res.json(response);
+    }
   } catch (error) {
     console.error('Error fetching resumes:', error);
     const response: ResumeBuilderResponse = {
@@ -135,24 +172,45 @@ export const getAllResumes: RequestHandler = async (req, res) => {
 export const deleteResume: RequestHandler = async (req, res) => {
   try {
     await connectToDatabase();
-    
+
     const { id } = req.params;
-    const resume = await Resume.findByIdAndDelete(id);
-    
-    if (!resume) {
+
+    if (isUsingFallback()) {
+      const index = inMemoryResumes.findIndex(r => r._id === id);
+      if (index === -1) {
+        const response: ResumeBuilderResponse = {
+          success: false,
+          message: 'Resume not found'
+        };
+        return res.status(404).json(response);
+      }
+
+      inMemoryResumes.splice(index, 1);
+
       const response: ResumeBuilderResponse = {
-        success: false,
-        message: 'Resume not found'
+        success: true,
+        message: 'Resume deleted successfully'
       };
-      return res.status(404).json(response);
+
+      res.json(response);
+    } else {
+      const resume = await Resume.findByIdAndDelete(id);
+
+      if (!resume) {
+        const response: ResumeBuilderResponse = {
+          success: false,
+          message: 'Resume not found'
+        };
+        return res.status(404).json(response);
+      }
+
+      const response: ResumeBuilderResponse = {
+        success: true,
+        message: 'Resume deleted successfully'
+      };
+
+      res.json(response);
     }
-
-    const response: ResumeBuilderResponse = {
-      success: true,
-      message: 'Resume deleted successfully'
-    };
-
-    res.json(response);
   } catch (error) {
     console.error('Error deleting resume:', error);
     const response: ResumeBuilderResponse = {
