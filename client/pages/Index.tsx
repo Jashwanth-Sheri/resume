@@ -24,7 +24,9 @@ const initialResumeData: ResumeData = {
   personalInfo: initialPersonalInfo,
   experience: [],
   education: [],
-  skills: []
+  skills: [],
+  template: 'classic',
+  sectionOrder: DEFAULT_SECTION_ORDER
 };
 
 export default function Index() {
