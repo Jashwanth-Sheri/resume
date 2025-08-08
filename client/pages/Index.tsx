@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { ResumeData, PersonalInfo, Experience, Education, Skill } from '@shared/resume-types';
-import { Save, Download, Eye, User, Briefcase, GraduationCap, Code, Edit3, EyeIcon } from 'lucide-react';
+import { Save, Download, Eye, User, Briefcase, GraduationCap, Code, Edit3, EyeIcon, Palette, Grid3x3 } from 'lucide-react';
 
 const initialPersonalInfo: PersonalInfo = {
   fullName: '',
