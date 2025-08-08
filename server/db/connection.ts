@@ -1,6 +1,7 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/resume-builder';
+const MONGODB_URI =
+  process.env.MONGODB_URI || "mongodb://localhost:27017/resume-builder";
 
 let isConnected = false;
 let usingFallback = false;
@@ -18,9 +19,12 @@ export async function connectToDatabase() {
     await mongoose.connect(MONGODB_URI);
     isConnected = true;
     usingFallback = false;
-    console.log('Connected to MongoDB');
+    console.log("Connected to MongoDB");
   } catch (error) {
-    console.warn('MongoDB connection failed, using in-memory storage for development:', error);
+    console.warn(
+      "MongoDB connection failed, using in-memory storage for development:",
+      error,
+    );
     isConnected = true;
     usingFallback = true;
   }

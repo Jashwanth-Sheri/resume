@@ -34,12 +34,12 @@ export interface Skill {
   id: string;
   name: string;
   category: string;
-  level: 'Beginner' | 'Intermediate' | 'Advanced' | 'Expert';
+  level: "Beginner" | "Intermediate" | "Advanced" | "Expert";
 }
 
 export interface ResumeSection {
   id: string;
-  type: 'personal' | 'summary' | 'experience' | 'education' | 'skills';
+  type: "personal" | "summary" | "experience" | "education" | "skills";
   title: string;
   visible: boolean;
 }
@@ -49,7 +49,7 @@ export interface ResumeTemplate {
   name: string;
   description: string;
   preview: string;
-  style: 'classic' | 'modern' | 'creative' | 'minimal';
+  style: "classic" | "modern" | "creative" | "minimal";
 }
 
 export interface ResumeData {

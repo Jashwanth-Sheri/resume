@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import { ResumeData } from '@shared/resume-types';
+import mongoose from "mongoose";
+import { ResumeData } from "@shared/resume-types";
 
 const PersonalInfoSchema = new mongoose.Schema({
   fullName: { type: String, required: true },
@@ -9,7 +9,7 @@ const PersonalInfoSchema = new mongoose.Schema({
   linkedin: { type: String },
   website: { type: String },
   summary: { type: String },
-  profilePicture: { type: String }
+  profilePicture: { type: String },
 });
 
 const ExperienceSchema = new mongoose.Schema({
@@ -20,7 +20,7 @@ const ExperienceSchema = new mongoose.Schema({
   startDate: { type: String, required: true },
   endDate: { type: String },
   isCurrentJob: { type: Boolean, default: false },
-  description: { type: String }
+  description: { type: String },
 });
 
 const EducationSchema = new mongoose.Schema({
@@ -30,43 +30,48 @@ const EducationSchema = new mongoose.Schema({
   location: { type: String },
   graduationDate: { type: String, required: true },
   gpa: { type: String },
-  honors: { type: String }
+  honors: { type: String },
 });
 
 const SkillSchema = new mongoose.Schema({
   id: { type: String, required: true },
   name: { type: String, required: true },
   category: { type: String },
-  level: { 
-    type: String, 
-    enum: ['Beginner', 'Intermediate', 'Advanced', 'Expert'],
-    default: 'Intermediate'
-  }
+  level: {
+    type: String,
+    enum: ["Beginner", "Intermediate", "Advanced", "Expert"],
+    default: "Intermediate",
+  },
 });
 
 const SectionSchema = new mongoose.Schema({
   id: { type: String, required: true },
   type: {
     type: String,
-    enum: ['personal', 'summary', 'experience', 'education', 'skills'],
-    required: true
+    enum: ["personal", "summary", "experience", "education", "skills"],
+    required: true,
   },
   title: { type: String, required: true },
-  visible: { type: Boolean, default: true }
+  visible: { type: Boolean, default: true },
 });
 
-const ResumeSchema = new mongoose.Schema({
-  personalInfo: { type: PersonalInfoSchema, required: true },
-  experience: { type: [ExperienceSchema], default: [] },
-  education: { type: [EducationSchema], default: [] },
-  skills: { type: [SkillSchema], default: [] },
-  template: { type: String, default: 'classic' },
-  sectionOrder: { type: [SectionSchema], default: [] }
-}, {
-  timestamps: true
-});
+const ResumeSchema = new mongoose.Schema(
+  {
+    personalInfo: { type: PersonalInfoSchema, required: true },
+    experience: { type: [ExperienceSchema], default: [] },
+    education: { type: [EducationSchema], default: [] },
+    skills: { type: [SkillSchema], default: [] },
+    template: { type: String, default: "classic" },
+    sectionOrder: { type: [SectionSchema], default: [] },
+  },
+  {
+    timestamps: true,
+  },
+);
 
 // Create the model with proper typing
-export const Resume = mongoose.models.Resume || mongoose.model<ResumeData & mongoose.Document>('Resume', ResumeSchema);
+export const Resume =
+  mongoose.models.Resume ||
+  mongoose.model<ResumeData & mongoose.Document>("Resume", ResumeSchema);
 
 export default Resume;
