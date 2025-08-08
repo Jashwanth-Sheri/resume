@@ -4,7 +4,9 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { ResumeData, PersonalInfo, Experience, Education, Skill } from '@shared/resume-types';
+import { ResumeData, PersonalInfo, Experience, Education, Skill, ResumeSection } from '@shared/resume-types';
+import { RESUME_TEMPLATES, DEFAULT_SECTION_ORDER } from '@shared/templates';
+import { ResumePreview } from '@/components/ResumeTemplates';
 import { Save, Download, Eye, User, Briefcase, GraduationCap, Code, Edit3, EyeIcon, Palette, Grid3x3 } from 'lucide-react';
 
 const initialPersonalInfo: PersonalInfo = {
