@@ -31,7 +31,7 @@ const initialResumeData: ResumeData = {
 
 export default function Index() {
   const [resumeData, setResumeData] = useState<ResumeData>(initialResumeData);
-  const [activeSection, setActiveSection] = useState<'personal' | 'experience' | 'education' | 'skills'>('personal');
+  const [activeSection, setActiveSection] = useState<'personal' | 'experience' | 'education' | 'skills' | 'templates'>('personal');
   const [isSaving, setIsSaving] = useState(false);
   const [mobileView, setMobileView] = useState<'form' | 'preview'>('form');
 
