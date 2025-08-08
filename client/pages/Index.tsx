@@ -546,16 +546,16 @@ export default function Index() {
           </div>
 
           {/* Right Panel - Live Preview */}
-          <div className="lg:sticky lg:top-6 lg:h-fit">
+          <div className="xl:sticky xl:top-6 xl:h-fit">
             <Card className="border-orange-200 shadow-lg">
               <CardHeader className="bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-t-lg">
-                <CardTitle className="flex items-center">
-                  <Eye className="w-5 h-5 mr-2" />
+                <CardTitle className="flex items-center text-base md:text-lg">
+                  <Eye className="w-4 h-4 md:w-5 md:h-5 mr-2" />
                   Live Preview
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-0">
-                <div className="bg-white p-8 max-h-[calc(100vh-200px)] overflow-y-auto print:max-h-none print:overflow-visible">
+                <div className="bg-white p-4 md:p-8 max-h-[calc(100vh-200px)] overflow-y-auto print:max-h-none print:overflow-visible">
                   {/* Resume Preview Content */}
                   <div className="max-w-none text-sm leading-relaxed">
                     {/* Header */}
