@@ -168,31 +168,33 @@ export default function Index() {
       <div className="bg-white border-b shadow-sm">
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-                <Eye className="w-6 h-6 text-white" />
+            <div className="flex items-center space-x-3 md:space-x-4">
+              <div className="w-8 h-8 md:w-10 md:h-10 bg-primary rounded-lg flex items-center justify-center">
+                <Eye className="w-4 h-4 md:w-6 md:h-6 text-white" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">Resume Builder</h1>
-                <p className="text-sm text-gray-500">Create your perfect resume in minutes</p>
+                <h1 className="text-xl md:text-2xl font-bold text-gray-900">Resume Builder</h1>
+                <p className="text-xs md:text-sm text-gray-500 hidden sm:block">Create your perfect resume in minutes</p>
               </div>
             </div>
-            <div className="flex items-center space-x-3">
-              <Button 
-                onClick={saveResume} 
+            <div className="flex items-center space-x-2 md:space-x-3">
+              <Button
+                onClick={saveResume}
                 disabled={isSaving}
+                size="sm"
                 className="bg-primary hover:bg-primary/90"
               >
-                <Save className="w-4 h-4 mr-2" />
-                {isSaving ? 'Saving...' : 'Save'}
+                <Save className="w-4 h-4 md:mr-2" />
+                <span className="hidden md:inline">{isSaving ? 'Saving...' : 'Save'}</span>
               </Button>
-              <Button 
+              <Button
                 onClick={exportToPDF}
                 variant="outline"
+                size="sm"
                 className="border-primary text-primary hover:bg-primary/10"
               >
-                <Download className="w-4 h-4 mr-2" />
-                Export PDF
+                <Download className="w-4 h-4 md:mr-2" />
+                <span className="hidden md:inline">Export PDF</span>
               </Button>
             </div>
           </div>
