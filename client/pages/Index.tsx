@@ -14,7 +14,8 @@ const initialPersonalInfo: PersonalInfo = {
   location: '',
   linkedin: '',
   website: '',
-  summary: ''
+  summary: '',
+  profilePicture: ''
 };
 
 const initialResumeData: ResumeData = {
