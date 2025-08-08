@@ -634,6 +634,16 @@ export default function Index() {
                   <div className="max-w-none text-sm leading-relaxed">
                     {/* Header */}
                     <div className="text-center mb-6 pb-4 border-b-2 border-orange-500">
+                      {/* Profile Picture */}
+                      {resumeData.personalInfo.profilePicture && (
+                        <div className="flex justify-center mb-4">
+                          <img
+                            src={resumeData.personalInfo.profilePicture}
+                            alt="Profile"
+                            className="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover border-4 border-orange-500 shadow-lg"
+                          />
+                        </div>
+                      )}
                       <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
                         {resumeData.personalInfo.fullName || 'Your Name'}
                       </h1>
