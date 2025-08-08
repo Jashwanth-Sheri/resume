@@ -20,5 +20,11 @@ export function createServer() {
 
   app.get("/api/demo", handleDemo);
 
+  // Resume API routes
+  app.post("/api/resume", saveResume);
+  app.get("/api/resume/:id", getResume);
+  app.get("/api/resumes", getAllResumes);
+  app.delete("/api/resume/:id", deleteResume);
+
   return app;
 }
