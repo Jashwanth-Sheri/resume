@@ -207,20 +207,21 @@ export default function Index() {
             <Card className="border-orange-200">
               <CardHeader className="pb-4">
                 <CardTitle className="text-xl text-gray-900">Build Your Resume</CardTitle>
-                <div className="flex flex-wrap gap-2 mt-4">
+                <div className="grid grid-cols-2 md:flex md:flex-wrap gap-2 mt-4">
                   {sectionButtons.map(({ key, label, icon: Icon }) => (
                     <Button
                       key={key}
                       onClick={() => setActiveSection(key)}
                       variant={activeSection === key ? "default" : "outline"}
                       size="sm"
-                      className={activeSection === key ? 
-                        "bg-primary text-white" : 
-                        "border-orange-200 text-gray-600 hover:bg-orange-50"
+                      className={activeSection === key ?
+                        "bg-primary text-white shadow-md" :
+                        "border-orange-200 text-gray-600 hover:bg-orange-50 hover:border-orange-300"
                       }
                     >
-                      <Icon className="w-4 h-4 mr-2" />
-                      {label}
+                      <Icon className="w-4 h-4 mr-1 md:mr-2" />
+                      <span className="hidden sm:inline">{label}</span>
+                      <span className="sm:hidden">{label.split(' ')[0]}</span>
                     </Button>
                   ))}
                 </div>
