@@ -7,30 +7,63 @@ import Resume from "../db/resume-model";
 export const saveResume: RequestHandler = async (req, res) => {
   try {
     await connectToDatabase();
-    
+
     const resumeData: ResumeData = req.body;
-    
-    let resume;
-    if (resumeData._id) {
-      // Update existing resume
-      resume = await Resume.findByIdAndUpdate(
-        resumeData._id,
-        resumeData,
-        { new: true, runValidators: true }
-      );
+
+    if (isUsingFallback()) {
+      // Use in-memory storage
+      let resume;
+      if (resumeData._id) {
+        // Update existing resume
+        const index = inMemoryResumes.findIndex(r => r._id === resumeData._id);
+        if (index !== -1) {
+          resume = { ...resumeData, updatedAt: new Date() };
+          inMemoryResumes[index] = resume;
+        } else {
+          throw new Error('Resume not found');
+        }
+      } else {
+        // Create new resume
+        resume = {
+          ...resumeData,
+          _id: Date.now().toString(),
+          createdAt: new Date(),
+          updatedAt: new Date()
+        };
+        inMemoryResumes.push(resume);
+      }
+
+      const response: ResumeBuilderResponse = {
+        success: true,
+        data: resume,
+        message: resumeData._id ? 'Resume updated successfully' : 'Resume created successfully'
+      };
+
+      res.json(response);
     } else {
-      // Create new resume
-      resume = new Resume(resumeData);
-      await resume.save();
+      // Use MongoDB
+      let resume;
+      if (resumeData._id) {
+        // Update existing resume
+        resume = await Resume.findByIdAndUpdate(
+          resumeData._id,
+          resumeData,
+          { new: true, runValidators: true }
+        );
+      } else {
+        // Create new resume
+        resume = new Resume(resumeData);
+        await resume.save();
+      }
+
+      const response: ResumeBuilderResponse = {
+        success: true,
+        data: resume.toObject(),
+        message: resumeData._id ? 'Resume updated successfully' : 'Resume created successfully'
+      };
+
+      res.json(response);
     }
-
-    const response: ResumeBuilderResponse = {
-      success: true,
-      data: resume.toObject(),
-      message: resumeData._id ? 'Resume updated successfully' : 'Resume created successfully'
-    };
-
-    res.json(response);
   } catch (error) {
     console.error('Error saving resume:', error);
     const response: ResumeBuilderResponse = {
