@@ -202,11 +202,33 @@ export default function Index() {
         </div>
       </div>
 
+      {/* Mobile Toggle Buttons */}
+      <div className="xl:hidden max-w-7xl mx-auto px-4 pt-4">
+        <div className="flex bg-white rounded-lg border border-orange-200 p-1">
+          <Button
+            onClick={() => setMobileView('form')}
+            variant={mobileView === 'form' ? 'default' : 'ghost'}
+            className={`flex-1 ${mobileView === 'form' ? 'bg-primary text-white' : 'text-gray-600'}`}
+          >
+            <Edit3 className="w-4 h-4 mr-2" />
+            Edit Resume
+          </Button>
+          <Button
+            onClick={() => setMobileView('preview')}
+            variant={mobileView === 'preview' ? 'default' : 'ghost'}
+            className={`flex-1 ${mobileView === 'preview' ? 'bg-primary text-white' : 'text-gray-600'}`}
+          >
+            <EyeIcon className="w-4 h-4 mr-2" />
+            Preview
+          </Button>
+        </div>
+      </div>
+
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 py-6">
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 h-[calc(100vh-140px)]">
           {/* Left Panel - Form */}
-          <div className="space-y-6">
+          <div className={`space-y-6 ${mobileView === 'preview' ? 'hidden xl:block' : 'block'}`}>
             <Card className="border-orange-200">
               <CardHeader className="pb-4">
                 <CardTitle className="text-xl text-gray-900">Build Your Resume</CardTitle>
