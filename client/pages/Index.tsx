@@ -228,7 +228,7 @@ export default function Index() {
       <div className="max-w-7xl mx-auto px-4 py-6">
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 h-[calc(100vh-140px)]">
           {/* Left Panel - Form */}
-          <div className={`space-y-6 ${mobileView === 'preview' ? 'hidden xl:block' : 'block'}`}>
+          <div className={`space-y-6 ${mobileView === 'preview' ? 'hidden xl:block' : 'block xl:block'}`}>
             <Card className="border-orange-200">
               <CardHeader className="pb-4">
                 <CardTitle className="text-xl text-gray-900">Build Your Resume</CardTitle>
