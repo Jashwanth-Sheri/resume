@@ -37,12 +37,29 @@ export interface Skill {
   level: 'Beginner' | 'Intermediate' | 'Advanced' | 'Expert';
 }
 
+export interface ResumeSection {
+  id: string;
+  type: 'personal' | 'summary' | 'experience' | 'education' | 'skills';
+  title: string;
+  visible: boolean;
+}
+
+export interface ResumeTemplate {
+  id: string;
+  name: string;
+  description: string;
+  preview: string;
+  style: 'classic' | 'modern' | 'creative' | 'minimal';
+}
+
 export interface ResumeData {
   _id?: string;
   personalInfo: PersonalInfo;
   experience: Experience[];
   education: Education[];
   skills: Skill[];
+  template: string;
+  sectionOrder: ResumeSection[];
   createdAt?: Date;
   updatedAt?: Date;
 }
